@@ -6,12 +6,15 @@
 
 每日自动构建 · 严选优质资源 · 纯净开箱即用
 
-[![Stars](https://img.shields.io/github/stars/HenryChiao/mihomo_yamls?style=flat-square&logo=github&label=Stars&color=2ea44f)](https://github.com/HenryChiao/mihomo_yamls/stargazers)
-[![Forks](https://img.shields.io/github/forks/HenryChiao/mihomo_yamls?style=flat-square&logo=github&label=Forks&color=181717)](https://github.com/HenryChiao/mihomo_yamls/network/members)
-[![Issues](https://img.shields.io/github/issues/HenryChiao/mihomo_yamls?style=flat-square&logo=github&color=0969da)](https://github.com/HenryChiao/mihomo_yamls/issues)
+> [!NOTE]
+> **个人 Fork 说明**：本仓库是 [HenryChiao/MIHOMO_YAMLS](https://github.com/HenryChiao/MIHOMO_YAMLS) 的个人分支，在原项目基础上新增了**无订阅 / 无节点模板配置**，详见 [📦 本 Fork 新增内容](#-本-fork-新增内容)。
+
+[![Stars](https://img.shields.io/github/stars/horizone146/mihomo_yamls?style=flat-square&logo=github&label=Stars&color=2ea44f)](https://github.com/horizone146/mihomo_yamls/stargazers)
+[![Forks](https://img.shields.io/github/forks/horizone146/mihomo_yamls?style=flat-square&logo=github&label=Forks&color=181717)](https://github.com/horizone146/mihomo_yamls/network/members)
+[![Upstream](https://img.shields.io/badge/上游项目-HenryChiao%2FMIHOMO__YAMLS-0969da?style=flat-square&logo=github)](https://github.com/HenryChiao/mihomo_yamls)
 [![License](https://img.shields.io/github/license/HenryChiao/mihomo_yamls?style=flat-square&color=546e7a)](./LICENSE)
 
-[📖 开始使用](./THEDOC/THE_REAL_README.md) &nbsp;|&nbsp; [📚 Wiki 教程](https://github.com/HenryChiao/MIHOMO_YAMLS/wiki) &nbsp;|&nbsp; [⬇️ 客户端下载](./THEDOC/CLIENTS.md) &nbsp;|&nbsp; [💐 致谢名单](./THEDOC/CREDITS.md) &nbsp;|&nbsp; [💬 反馈问题](https://github.com/HenryChiao/mihomo_yamls/issues)
+[📖 开始使用](./THEDOC/THE_REAL_README.md) &nbsp;|&nbsp; [📚 Wiki 教程](https://github.com/HenryChiao/MIHOMO_YAMLS/wiki) &nbsp;|&nbsp; [⬇️ 客户端下载](./THEDOC/CLIENTS.md) &nbsp;|&nbsp; [💐 致谢名单](./THEDOC/CREDITS.md) &nbsp;|&nbsp; [💬 上游反馈](https://github.com/HenryChiao/mihomo_yamls/issues)
 
 </div>
 
@@ -82,6 +85,39 @@
 
 ---
 
+## 📦 本 Fork 新增内容
+
+### OneSmart 无订阅 / 无节点模板
+
+基于上游 [OneSmart_Config.yaml](./THEYAMLS/Smart_Mode/666OS/OneSmart_Config.yaml)（666OS 的 OneSmartPro 智能配置）制作，**不包含任何订阅源与节点信息**，适合用自己的订阅搭配使用。
+
+**相比原版移除：**
+
+- `proxy-providers`（优质 / 备用 / 落地服务商占位订阅源）
+- `中转服务` 策略组及 `policy-priority` 权重（依赖订阅前缀 `[优]/[备]/[中]`）
+- 对应的 `BaseProvider`、`BaseLB` 锚点
+
+**完整保留：**
+
+- 四层策略组架构：一键智能 / 线路特性层 / 7 个地区 Smart 组 / 手动选择
+- 全套分流规则（AI、流媒体、电报、Emby 等 34 个规则集）
+- DNS（fake-ip + rule-set 过滤）、TUN、嗅探、分地区监听端口
+
+**使用方式（Clash Party / Mihomo Party）：**
+
+1. 不要作为独立配置导入（无节点无法使用）
+2. 在「覆写」中新建 YAML 覆写，粘贴本文件内容
+3. 将该覆写挂载到你的订阅配置上
+4. 节点由订阅通过 `include-all` + 名称正则自动注入各地区策略组
+
+**直链：**
+
+```
+https://raw.githubusercontent.com/horizone146/MIHOMO_YAMLS/main/THEYAMLS/Smart_Mode/666OS/OneSmart_Config_NoSub.yaml
+```
+
+---
+
 ## ⚠️ 免责声明
 
 > [!CAUTION]
@@ -103,9 +139,9 @@
 ### 🤝 参与贡献与反馈
 
 **Life is a two-way street.**
-<br>遇到问题或有改进建议？欢迎提交 Issue。
+<br>遇到问题或有改进建议？欢迎到上游项目提交 Issue。
 
-[🐛 提交 Bug](https://github.com/HenryChiao/mihomo_yamls/issues/new) &nbsp;&nbsp;&nbsp; [💡 提交建议](https://github.com/HenryChiao/mihomo_yamls/issues/new)
+[🐛 上游提交 Bug](https://github.com/HenryChiao/mihomo_yamls/issues/new) &nbsp;&nbsp;&nbsp; [💡 上游提交建议](https://github.com/HenryChiao/mihomo_yamls/issues/new)
 
 <br/>
 
