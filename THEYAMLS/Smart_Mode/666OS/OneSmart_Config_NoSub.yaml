@@ -12,13 +12,12 @@
 # 原版: https://github.com/666OS/YYDS
 # 原作者: YYDS666
 # 说明: 已移除 proxy-providers(订阅源)、中转服务组、policy-priority
-#       以及 高质量/低延迟/大带宽 线路组(保留低倍率线路)
+#       以及全部线路特性组(高质量/低延迟/大带宽/低倍率)
 #       节点由你自己的订阅配置提供，通过 include-all 自动注入各策略组
 #       使用方式: Clash Party 中作为覆写(Override)挂载到订阅配置上
 
 # ==================== 锚点配置 ====================
 # 策略组类型模板 - 定义不同的策略组基础配置
-BaseFB: &BaseFB       {type: fallback, interval: 200, lazy: true, empty-fallback: REJECT, url: 'https://www.google.com/generate_204'}
 BaseSmart: &BaseSmart {type: smart, interval: 200, lazy: true, empty-fallback: REJECT, url: 'https://www.google.com/generate_204', hidden: true, uselightgbm: true}
 
 # 节点筛选正则表达式 - 基于地理位置和关键词过滤
@@ -32,13 +31,13 @@ FilterEU: &FilterEU '^(?=.*(?i)(奥|比|保|克罗地亚|塞|捷|丹|爱沙|芬|
 FilterAL: &FilterAL '^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'
 
 # 策略组代理列表模板 - 预定义的代理节点优先级排序
-SelectAL: &SelectAL {type: select, proxies: [低倍率线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 手动选择, 直接连接]}
-OneSmart: &OneSmart {type: select, proxies: [一键智能, 低倍率线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 手动选择, 直接连接]}
-SelectDC: &SelectDC {type: select, proxies: [直接连接, 低倍率线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 一键智能, 手动选择]}
-SelectHQ: &SelectHQ {type: select, proxies: [低倍率线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 一键智能, 手动选择, 直接连接]}
-SelectLD: &SelectLD {type: select, proxies: [低倍率线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 一键智能, 手动选择, 直接连接]}
-SelectBW: &SelectBW {type: select, proxies: [低倍率线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 一键智能, 手动选择, 直接连接]}
-SelectLR: &SelectLR {type: select, proxies: [低倍率线路, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 一键智能, 手动选择, 直接连接]}
+SelectAL: &SelectAL {type: select, proxies: [香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 手动选择, 直接连接]}
+OneSmart: &OneSmart {type: select, proxies: [一键智能, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 手动选择, 直接连接]}
+SelectDC: &SelectDC {type: select, proxies: [直接连接, 香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 一键智能, 手动选择]}
+SelectHQ: &SelectHQ {type: select, proxies: [香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 一键智能, 手动选择, 直接连接]}
+SelectLD: &SelectLD {type: select, proxies: [香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 一键智能, 手动选择, 直接连接]}
+SelectBW: &SelectBW {type: select, proxies: [香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 一键智能, 手动选择, 直接连接]}
+SelectLR: &SelectLR {type: select, proxies: [香港智能, 台湾智能, 日本智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 一键智能, 手动选择, 直接连接]}
 
 # ==================== 监听器 ====================
 listeners:
@@ -165,9 +164,6 @@ proxy-groups:
   - {name: 兜底流量,  <<: *SelectHQ, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Final.png}
   - {name: 手动选择,  type: select, include-all: true, filter: *FilterAL, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Clubhouse.png}
   - {name: 直接连接,  type: select, proxies: [DIRECT], hidden: true, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Direct.png}
-
-  # 线路特性层 - Fallback故障转移
-  - {name: 低倍率线路,  <<: *BaseFB, proxies: [日本智能, 香港智能, 台湾智能, 狮城智能, 韩国智能, 美国智能, 欧洲智能, 手动选择, 直接连接], icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin_1.png}
 
  # 地理策略层 - Smart智能选择，根据节点名称正则自动筛选，节点由订阅通过 include-all 注入
   - {name: 香港智能,  <<: *BaseSmart, filter: *FilterHK, include-all: true, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Hong_Kong.png}
